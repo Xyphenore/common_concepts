@@ -1,0 +1,13 @@
+Attendre la sortie de doxygen 1.9.6
+Mettre en dépendance minimum de doxygen, la version 1.9.6
+Tester la génération de la documentation des concepts
+
+Mettre en place la génération de la doc Latex
+Optionnel : Récupérer les emojis si nécessaire
+
+Paramétrer la documentation générée
+Paramétrer la génération des graphiques dot
+
+Réduire les dépendances de CMake
+
+Ajouter les dépendances de Dot, GraphZy et doxygen avec clang
