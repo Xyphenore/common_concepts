@@ -40,7 +40,7 @@ write_basic_package_version_file(
 )
 
 if(NOT INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR include/concepts)
+    set(INCLUDE_INSTALL_DIR include/common_concepts)
 endif()
 
 configure_package_config_file(
@@ -55,7 +55,7 @@ configure_package_config_file(
 # ----------------------------------------------------------------------------------------------------------------------
 
 install(
-    DIRECTORY ${PROJECT_SOURCE_DIR}/include/concepts
+    DIRECTORY ${PROJECT_SOURCE_DIR}/include/common_concepts
     DESTINATION include
 )
 
