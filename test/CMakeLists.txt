@@ -79,10 +79,6 @@ else()
 
     endif()
 
-    unset(local_version)
-    unset(git_version)
-    unset(DOCTEST_VERSION_GIT)
-
 endif()
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -90,6 +86,7 @@ endif()
 # ----------------------------------------------------------------------------------------------------------------------
 
 add_library( doctest INTERFACE )
+target_compile_features( doctest INTERFACE cxx_std_20 )
 target_include_directories( doctest INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/doctest" )
 
 add_library( Test_Main OBJECT main.cpp )
