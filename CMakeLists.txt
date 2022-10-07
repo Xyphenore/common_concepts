@@ -52,8 +52,8 @@ option( CONCEPTS_NO_INSTALL "Don't install the library" OFF )
 option( CONCEPTS_WITH_DOCUMENTATION "Build the documentation" OFF )
 
 if ( NOT CONCEPTS_NO_INSTALL )
-    message("No installation.")
-    add_subdirectory(cmake)
+    message( "Installation." )
+    add_subdirectory( cmake )
 endif()
 
 if ( CONCEPTS_WITH_TESTS )
