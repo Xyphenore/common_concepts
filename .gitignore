@@ -37,3 +37,10 @@
 # Build directory of Intellij
 cmake-build-*
 .git/
+
+# Downloaded lib by cmake
+/test/doctest/
+/docs/doxygen-awesome-css/
+
+# Doc config
+/docs/DoxygenConfig.conf
