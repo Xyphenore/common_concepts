@@ -631,7 +631,7 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    Common_Concepts - Safe conversion from a string to integer.
+    Common_Concepts - Concepts not included in the std::concepts.
     Copyright (C) 2022 Xyphenore
 
     This program is free software: you can redistribute it and/or modify

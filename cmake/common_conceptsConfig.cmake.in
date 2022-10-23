@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------
-# Common_Concepts - Safe conversion from a string to integer.
+# Common_Concepts - Concepts not included in the std::concepts.
 # Copyright (C)  2022 Xyphenore
 #
 # This program is free software: you can redistribute it and/or modify

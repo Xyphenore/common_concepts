@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Common_Concepts - Safe conversion from a string to integer.
+ * Common_Concepts - Concepts not included in the std::concepts.
  * Copyright (C)  2022 Xyphenore
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,25 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  ******************************************************************************/
 
+#include "doctest/doctest.h"
+
+#include <common_concepts/hashable.hpp>
 #include <cstdint>
 #include <string>
 #include <string_view>
 #include <utility>
 
-#include "doctest/doctest.h"
-
-#include <common_concepts/hashable.hpp>
-
 namespace {
-    template<common_concepts::Hashable T>
+    template <common_concepts::Hashable T>
     class HashableTest final {
     public:
-        constexpr explicit HashableTest( T test ) noexcept
-        : value_( std::move(test) ) {}
+        constexpr explicit HashableTest(T test) noexcept: value_(std::move(test)) {}
 
-        [[nodiscard("You call the function to get the hash of subvalue.")]]
-        constexpr size_t hash() const noexcept {
-            return std::hash<T>{}( value_ );
+        [[nodiscard("You call the function to get the hash of subvalue.")]] constexpr size_t hash() const noexcept {
+            return std::hash<T>{}(value_);
         }
 
     private:
@@ -52,33 +49,36 @@ namespace {
 #define COMMON_CONCEPTS_TEST_UNSIGNED_INTEGERS uint8_t, uint16_t, uint32_t, uint64_t, size_t
 
 DOCTEST_TEST_SUITE("Test Hashable concept") {
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on integers", T, COMMON_CONCEPTS_TEST_SIGNED_INTEGERS, COMMON_CONCEPTS_TEST_UNSIGNED_INTEGERS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on integers",
+                               T,
+                               COMMON_CONCEPTS_TEST_SIGNED_INTEGERS,
+                               COMMON_CONCEPTS_TEST_UNSIGNED_INTEGERS) {
         constexpr T integer = 15;
-        DOCTEST_REQUIRE( (std::hash<T>{}( integer ) == ::HashableTest( integer ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(integer) == ::HashableTest(integer).hash()));
     }
 
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on string", T, COMMON_CONCEPTS_TEST_STRINGS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on string", T, COMMON_CONCEPTS_TEST_STRINGS) {
         const T text("TEST");
-        DOCTEST_REQUIRE( (std::hash<T>{}( text ) == ::HashableTest( text ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(text) == ::HashableTest(text).hash()));
     }
 
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on u8 string", T, COMMON_CONCEPTS_TEST_U8STRINGS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on u8 string", T, COMMON_CONCEPTS_TEST_U8STRINGS) {
         const T text(u8"TEST");
-        DOCTEST_REQUIRE( (std::hash<T>{}( text ) == ::HashableTest( text ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(text) == ::HashableTest(text).hash()));
     }
 
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on u16 string", T, COMMON_CONCEPTS_TEST_U16STRINGS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on u16 string", T, COMMON_CONCEPTS_TEST_U16STRINGS) {
         const T text(u"TEST");
-        DOCTEST_REQUIRE( (std::hash<T>{}( text ) == ::HashableTest( text ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(text) == ::HashableTest(text).hash()));
     }
 
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on u32 string", T, COMMON_CONCEPTS_TEST_U32STRINGS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on u32 string", T, COMMON_CONCEPTS_TEST_U32STRINGS) {
         const T text(U"TEST");
-        DOCTEST_REQUIRE( (std::hash<T>{}( text ) == ::HashableTest( text ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(text) == ::HashableTest(text).hash()));
     }
 
-    DOCTEST_TEST_CASE_TEMPLATE( "Test on wstring", T, COMMON_CONCEPTS_TEST_WSTRINGS ) {
+    DOCTEST_TEST_CASE_TEMPLATE("Test on wstring", T, COMMON_CONCEPTS_TEST_WSTRINGS) {
         const T text(L"TEST");
-        DOCTEST_REQUIRE( (std::hash<T>{}( text ) == ::HashableTest( text ).hash()) );
+        DOCTEST_REQUIRE((std::hash<T>{}(text) == ::HashableTest(text).hash()));
     }
 }

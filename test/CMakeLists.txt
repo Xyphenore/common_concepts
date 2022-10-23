@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------
-# Common_Concepts - Safe conversion from a string to integer.
+# Common_Concepts - Concepts not included in the std::concepts.
 # Copyright (C)  2022 Xyphenore
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required( VERSION 3.22 )
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Download latest version of doctest
@@ -28,7 +28,7 @@ set( DOCTEST_VERSION "${CMAKE_CURRENT_SOURCE_DIR}/doctest/version.txt" )
 option( REGENERATE_DOCTEST "Re-download the DOCTEST library." OFF )
 
 if ( NOT EXISTS ${DOCTEST_FILE} OR REGENERATE_DOCTEST )
-    message("Download the latest doctest library.")
+    message( "Download the latest doctest library." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/doctest/doctest.h
@@ -37,7 +37,7 @@ if ( NOT EXISTS ${DOCTEST_FILE} OR REGENERATE_DOCTEST )
         SHOW_PROGRESS
     )
 
-    message("Download the doctest version.")
+    message( "Download the doctest version." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/scripts/version.txt
@@ -46,10 +46,10 @@ if ( NOT EXISTS ${DOCTEST_FILE} OR REGENERATE_DOCTEST )
         SHOW_PROGRESS
     )
 
-else()
+else ()
     set( DOCTEST_VERSION_GIT "${CMAKE_CURRENT_SOURCE_DIR}/doctest/git_version.txt" )
 
-    message("Download the git doctest version.")
+    message( "Download the git doctest version." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/scripts/version.txt
@@ -62,7 +62,7 @@ else()
     file( READ ${DOCTEST_VERSION} local_version )
 
     if ( ${local_version} LESS ${git_version} )
-        message("Download the latest doctest library.")
+        message( "Download the latest doctest library." )
         file(
             DOWNLOAD
             https://raw.githubusercontent.com/doctest/doctest/master/doctest/doctest.h
@@ -70,16 +70,16 @@ else()
             INACTIVITY_TIMEOUT 15
             SHOW_PROGRESS
         )
-        message("Update the doctest library.")
+        message( "Update the doctest library." )
 
         file( RENAME ${DOCTEST_VERSION_GIT} ${DOCTEST_VERSION} )
 
-    else()
+    else ()
         file( REMOVE ${DOCTEST_VERSION_GIT} )
 
-    endif()
+    endif ()
 
-endif()
+endif ()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Create the doctest library and the main function
@@ -115,11 +115,11 @@ target_include_directories( AllTests PRIVATE "${PROJECT_SOURCE_DIR}/include" )
 # Create each unique test
 # ----------------------------------------------------------------------------------------------------------------------
 
-foreach( test ${TestsToRun} )
+foreach ( test ${TestsToRun} )
     get_filename_component( TName ${test} NAME_WE )
     add_test( NAME ${TName} COMMAND AllTests ${TName} )
 
     add_executable( ${TName} "${TName}.cpp" $<TARGET_OBJECTS:Test_Main> )
     target_compile_features( ${TName} PRIVATE cxx_std_20 )
     target_include_directories( ${TName} PRIVATE "${PROJECT_SOURCE_DIR}/include" )
-endforeach()
+endforeach ()

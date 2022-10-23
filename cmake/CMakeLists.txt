@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------
-# Common_Concepts - Safe conversion from a string to integer.
+# Common_Concepts - Concepts not included in the std::concepts.
 # Copyright (C)  2022 Xyphenore
 #
 # This program is free software: you can redistribute it and/or modify
@@ -32,16 +32,16 @@ install(
 # Settings the details of package
 # ----------------------------------------------------------------------------------------------------------------------
 
-include(CMakePackageConfigHelpers)
+include( CMakePackageConfigHelpers )
 write_basic_package_version_file(
     "${PROJECT_NAME}ConfigVersion.cmake"
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
-if(NOT INCLUDE_INSTALL_DIR)
-    set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME})
-endif()
+if ( NOT INCLUDE_INSTALL_DIR )
+    set( INCLUDE_INSTALL_DIR include/${PROJECT_NAME} )
+endif ()
 
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake.in"
