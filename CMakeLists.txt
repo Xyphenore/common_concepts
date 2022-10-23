@@ -84,28 +84,36 @@ target_compile_options(
 # Set available options
 # ----------------------------------------------------------------------------------------------------------------------
 
-option( CONCEPTS_WITH_TESTS "Build the test directory" OFF )
-option( CONCEPTS_NO_INSTALL "Don't install the library" OFF )
-option( CONCEPTS_WITH_DOCUMENTATION "Build the documentation" OFF )
+string( TOUPPER ${PROJECT_NAME} UPPER_PROJECT_NAME )
 
-if ( NOT CONCEPTS_NO_INSTALL )
-    message( "Installation." )
+option( ${UPPER_PROJECT_NAME}_WITH_TESTS "Build the test directory" OFF )
+message( STATUS "Build the test directory: " ${${UPPER_PROJECT_NAME}_WITH_TESTS} )
+
+option( ${UPPER_PROJECT_NAME}_INSTALL "Don't install the library" ON )
+message( STATUS "Install the library: " ${${UPPER_PROJECT_NAME}_INSTALL} )
+
+option( ${UPPER_PROJECT_NAME}_WITH_DOCUMENTATION "Build the documentation" OFF )
+message( STATUS "Build the documentation: " ${${UPPER_PROJECT_NAME}_WITH_DOCUMENTATION} )
+
+option( ${UPPER_PROJECT_NAME}_WITH_EXAMPLES "Build all examples" OFF )
+message( STATUS "Build all examples: " ${${UPPER_PROJECT_NAME}_WITH_DOCUMENTATION} )
+
+if ( ${UPPER_PROJECT_NAME}_INSTALL )
     include( GNUInstallDirs )
     add_subdirectory( cmake )
 endif ()
 
-if ( CONCEPTS_WITH_TESTS )
-    message( "Tests activate." )
-
+if ( ${UPPER_PROJECT_NAME}_WITH_TESTS OR BUILD_TESTING )
     include( CTest )
-
-    # Activate the CTest discovery
     enable_testing()
 
     add_subdirectory( test )
 endif ()
 
-if ( CONCEPTS_WITH_DOCUMENTATION )
-    message( "Documentation activate." )
+if ( ${UPPER_PROJECT_NAME}_WITH_DOCUMENTATION )
     add_subdirectory( doc )
+endif ()
+
+if ( ${UPPER_PROJECT_NAME}_WITH_EXAMPLES )
+    add_subdirectory( example )
 endif ()
