@@ -16,7 +16,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ------------------------------------------------------------------------
 
-cmake_minimum_required( VERSION 3.22 )
+cmake_minimum_required( VERSION 3.16.3..3.23.2 )
 
 project(
     common_concepts
