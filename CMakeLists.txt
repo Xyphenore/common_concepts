@@ -21,6 +21,7 @@ cmake_minimum_required( VERSION 3.16.3..3.23.2 )
 project(
     common_concepts
     DESCRIPTION "Concepts not included in the std::concepts."
+    HOMEPAGE_URL https://github.com/Xyphenore/common_concepts
     VERSION 1.0.1
 )
 
