@@ -25,8 +25,6 @@ project(
     VERSION 1.0.1
 )
 
-include( GNUInstallDirs )
-
 # ----------------------------------------------------------------------------------------------------------------------
 # Create the common_concepts library
 # ----------------------------------------------------------------------------------------------------------------------
@@ -54,6 +52,7 @@ option( CONCEPTS_WITH_DOCUMENTATION "Build the documentation" OFF )
 
 if ( NOT CONCEPTS_NO_INSTALL )
     message( "Installation." )
+    include( GNUInstallDirs )
     add_subdirectory( cmake )
 endif ()
 
