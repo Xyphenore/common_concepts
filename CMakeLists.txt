@@ -61,6 +61,24 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+if ( ${CMAKE_CXX_COMPILER_ID} EQUAL "GNU" )
+    set(
+        EXTRA_FLAGS
+        -fimplicit-constexpr -Wnoexcept -Wstrict-null-sentinel -Wcatch-value=2 -Wuseless-cast
+        -Wsuggest-final-types -Wsuggest-final-methods
+    )
+elseif ( ${CMAKE_CXX_COMPILER_ID} EQUAL "clang" )
+endif ()
+target_compile_options(
+    ${PROJECT_NAME}
+    INTERFACE
+    -Wall -Wextra -Weffc++ -Wpedantic
+    -fstrict-enums
+    -Wctor-dtor-privacy -Wnon-virtual-dtor -Wold-style-cast -Woverloaded-virtual
+    -Wmismatched-tags -Wmismatched-new-delete -Wzero-as-null-pointer-constant -Wextra-semi
+    -Wsuggest-override -Wdouble-promotion
+    ${EXTRA_FLAGS}
+)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Set available options
