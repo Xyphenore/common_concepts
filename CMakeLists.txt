@@ -26,6 +26,26 @@ project(
 )
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Set the build type
+# ----------------------------------------------------------------------------------------------------------------------
+
+set( BUILD_TYPE_AVAILABLE RELEASE DEBUG )
+
+if ( NOT DEFINED CMAKE_BUILD_TYPE )
+    set(
+        CMAKE_BUILD_TYPE RELEASE CACHE STRING
+        "Choose the type of build, options are: ${BUILD_TYPE_AVAILABLE}."
+        FORCE
+    )
+endif ()
+
+string( TOUPPER ${CMAKE_BUILD_TYPE} CMAKE_BUILD_TYPE )
+
+if ( NOT "${CMAKE_BUILD_TYPE}" IN_LIST BUILD_TYPE_AVAILABLE )
+    message( STATUS "Choose the type of build, options are: ${BUILD_TYPE_AVAILABLE}." )
+endif ()
+
+# ----------------------------------------------------------------------------------------------------------------------
 # Create the common_concepts library
 # ----------------------------------------------------------------------------------------------------------------------
 
