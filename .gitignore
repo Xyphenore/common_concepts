@@ -40,7 +40,7 @@ cmake-build-*
 
 # Downloaded lib by cmake
 /test/doctest/
-/docs/doxygen-awesome-css/
+/doc/doxygen-awesome-css/
 
 # Doc config
-/docs/DoxygenConfig.conf
+/doc/DoxygenConfig.conf

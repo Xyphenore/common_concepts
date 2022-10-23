@@ -16,21 +16,21 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required( VERSION 3.22 )
 
 project(
     common_concepts
     DESCRIPTION "Concepts not included in the std::concepts."
-    VERSION 1.0.0
+    VERSION 1.0.1
 )
 
-include(GNUInstallDirs)
+include( GNUInstallDirs )
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Create the common_concepts library
 # ----------------------------------------------------------------------------------------------------------------------
 
-add_library(${PROJECT_NAME} INTERFACE)
+add_library( ${PROJECT_NAME} INTERFACE )
 target_compile_features(
     ${PROJECT_NAME}
     INTERFACE
@@ -54,20 +54,20 @@ option( CONCEPTS_WITH_DOCUMENTATION "Build the documentation" OFF )
 if ( NOT CONCEPTS_NO_INSTALL )
     message( "Installation." )
     add_subdirectory( cmake )
-endif()
+endif ()
 
 if ( CONCEPTS_WITH_TESTS )
-    message("Tests activate.")
+    message( "Tests activate." )
 
-    include(CTest)
+    include( CTest )
 
     # Activate the CTest discovery
     enable_testing()
 
-    add_subdirectory(test)
-endif()
+    add_subdirectory( test )
+endif ()
 
 if ( CONCEPTS_WITH_DOCUMENTATION )
-    message("Documentation activate.")
-    add_subdirectory(docs)
-endif()
+    message( "Documentation activate." )
+    add_subdirectory( doc )
+endif ()
