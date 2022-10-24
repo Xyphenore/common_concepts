@@ -16,61 +16,63 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # ------------------------------------------------------------------------
 
-cmake_minimum_required( VERSION 3.22 )
+cmake_minimum_required( VERSION 3.12 )
 
 # ----------------------------------------------------------------------------------------------------------------------
 # Download latest version of doctest
 # ----------------------------------------------------------------------------------------------------------------------
 
-set( DOCTEST_FILE "${CMAKE_CURRENT_SOURCE_DIR}/doctest/doctest.h" )
-set( DOCTEST_VERSION "${CMAKE_CURRENT_SOURCE_DIR}/doctest/version.txt" )
+set( DOCTEST_DIR "${CMAKE_CURRENT_SOURCE_DIR}/doctest" )
+set( DOCTEST_FILE "${DOCTEST_DIR}/doctest.h" )
+set( DOCTEST_VERSION "${DOCTEST_DIR}/version.txt" )
 
 option( REGENERATE_DOCTEST "Re-download the DOCTEST library." OFF )
+message( STATUS "Re-download the DOCTEST library: " ${REGENERATE_DOCTEST} )
 
 if ( NOT EXISTS ${DOCTEST_FILE} OR REGENERATE_DOCTEST )
-    message( "Download the latest doctest library." )
+    message( STATUS "Download the latest doctest library." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/doctest/doctest.h
         ${DOCTEST_FILE}
-        INACTIVITY_TIMEOUT 15
-        SHOW_PROGRESS
+        TIMEOUT 15
     )
+    message( STATUS "Download the latest doctest library: 100%." )
 
-    message( "Download the doctest version." )
+    message( STATUS "Download the doctest version." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/scripts/version.txt
         ${DOCTEST_VERSION}
-        INACTIVITY_TIMEOUT 15
-        SHOW_PROGRESS
+        TIMEOUT 15
     )
+    message( STATUS "Download the doctest version: 100%." )
 
 else ()
-    set( DOCTEST_VERSION_GIT "${CMAKE_CURRENT_SOURCE_DIR}/doctest/git_version.txt" )
+    set( DOCTEST_VERSION_GIT "${DOCTEST_DIR}/git_version.txt" )
 
-    message( "Download the git doctest version." )
+    message( STATUS "Download the git doctest version." )
     file(
         DOWNLOAD
         https://raw.githubusercontent.com/doctest/doctest/master/scripts/version.txt
         ${DOCTEST_VERSION_GIT}
-        INACTIVITY_TIMEOUT 15
-        SHOW_PROGRESS
+        TIMEOUT 15
     )
+    message( STATUS "Download the git doctest version: 100%." )
 
-    file( READ ${DOCTEST_VERSION_GIT} git_version )
-    file( READ ${DOCTEST_VERSION} local_version )
+    file( STRINGS ${DOCTEST_VERSION_GIT} git_version LIMIT_COUNT 1 )
+    file( STRINGS ${DOCTEST_VERSION} local_version LIMIT_COUNT 1 )
 
-    if ( ${local_version} LESS ${git_version} )
-        message( "Download the latest doctest library." )
+    if ( ${local_version} VERSION_LESS ${git_version} )
+        message( STATUS "Download the latest doctest library." )
         file(
             DOWNLOAD
             https://raw.githubusercontent.com/doctest/doctest/master/doctest/doctest.h
             ${DOCTEST_FILE}
-            INACTIVITY_TIMEOUT 15
-            SHOW_PROGRESS
+            TIMEOUT 15
         )
-        message( "Update the doctest library." )
+        message( STATUS "Download the latest doctest library: 100%." )
+        message( STATUS "Update the doctest library." )
 
         file( RENAME ${DOCTEST_VERSION_GIT} ${DOCTEST_VERSION} )
 
@@ -115,7 +117,7 @@ target_include_directories( AllTests PRIVATE "${PROJECT_SOURCE_DIR}/include" )
 # Create each unique test
 # ----------------------------------------------------------------------------------------------------------------------
 
-foreach ( test ${TestsToRun} )
+foreach ( test IN LISTS ${TestsToRun} )
     get_filename_component( TName ${test} NAME_WE )
     add_test( NAME ${TName} COMMAND AllTests ${TName} )
 
