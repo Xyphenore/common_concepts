@@ -23,6 +23,7 @@ project(
     DESCRIPTION "Concepts not included in the std::concepts."
     HOMEPAGE_URL https://github.com/Xyphenore/common_concepts
     VERSION 1.0.1
+    LANGUAGES CXX
 )
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -50,6 +51,8 @@ endif ()
 # ----------------------------------------------------------------------------------------------------------------------
 
 add_library( ${PROJECT_NAME} INTERFACE )
+set_target_properties( ${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 )
+set_target_properties( ${PROJECT_NAME} PROPERTIES CXX_STANDARD_REQUIRED ON )
 target_compile_features( ${PROJECT_NAME} INTERFACE cxx_std_20 )
 target_include_directories(
     ${PROJECT_NAME}
