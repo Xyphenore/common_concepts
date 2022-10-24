@@ -36,8 +36,8 @@ WARN_AS_ERROR=YES
 #     Project information            #
 ######################################
 
-PROJECT_NAME="@PROJECT_NAME@"
-PROJECT_NUMBER="@PROJECT_VERSION@"
+PROJECT_NAME="@PROJECT_NAME@ &nbsp;"
+PROJECT_NUMBER="v@PROJECT_VERSION@"
 PROJECT_BRIEF="@PROJECT_DESCRIPTION@"
 
 # PROJECT_LOGO=
@@ -46,7 +46,7 @@ PROJECT_BRIEF="@PROJECT_DESCRIPTION@"
 #     Output                         #
 ######################################
 
-OUTPUT_DIRECTORY="@CMAKE_SOURCE_DIR@/docs"
+OUTPUT_DIRECTORY="@CMAKE_SOURCE_DIR@/doc"
 
 CREATE_SUBDIRS=YES
 CREATE_SUBDIRS_LEVEL=8
@@ -74,7 +74,7 @@ INHERIT_DOCS=YES
 
 FULL_PATH_NAMES=YES
 STRIP_FROM_PATH=""
-STRIP_FROM_INC_PATH="include/"
+STRIP_FROM_INC_PATH=@STRIPED_INCLUDE_PATH@
 
 EXTRACT_ALL=NO
 EXTRACT_PRIVATE=NO
@@ -134,7 +134,7 @@ NUM_PROC_THREADS=2
 
 CLANG_ASSISTED_PARSING=YES
 CLANG_ADD_INC_PATHS=YES
-#CLANG_OPTIONS=""
+CLANG_OPTIONS="-std=c++20"
 #CLANG_DATABASE_PATH=""
 
 ######################################
@@ -199,7 +199,7 @@ ALPHABETICAL_INDEX=YES
 #    Visual                          #
 ######################################
 
-LAYOUT_FILE="@CMAKE_SOURCE_DIR@/docs/settings/DoxygenLayout.xml"
+LAYOUT_FILE="@CMAKE_SOURCE_DIR@/doc/settings/DoxygenLayout.xml"
 
 CITE_BIB_FILES=""
 
@@ -229,17 +229,18 @@ HTML_OUTPUT="html"
 
 HTML_FILE_EXTENSION=".html"
 
-HTML_HEADER="@CMAKE_SOURCE_DIR@/docs/settings/header.html"
-HTML_FOOTER="@CMAKE_SOURCE_DIR@/docs/settings/footer.html"
+HTML_HEADER="@CMAKE_SOURCE_DIR@/doc/settings/header.html"
+HTML_FOOTER="@CMAKE_SOURCE_DIR@/doc/settings/footer.html"
 HTML_STYLESHEET=""
-HTML_EXTRA_STYLESHEET="@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome.css \
-@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
-@CMAKE_SOURCE_DIR@/docs/settings/extra_stylesheet.css"
-HTML_EXTRA_FILES="@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
-@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
-@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
-@CMAKE_SOURCE_DIR@/docs/doxygen-awesome-css/doxygen-awesome-interactive-toc.js"
-HTML_COLORSTYLE=TOGGLE
+HTML_EXTRA_STYLESHEET=@CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome.css \
+                        @CMAKE_SOURCE_DIR@/doc/settings/extra_stylesheet.css \
+                        @CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-sidebar-only.css \
+                        @CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-sidebar-only-darkmode-toggle.css
+HTML_EXTRA_FILES=@CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-darkmode-toggle.js \
+                    @CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-fragment-copy-button.js \
+                    @CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-paragraph-link.js \
+                    @CMAKE_SOURCE_DIR@/doc/doxygen-awesome-css/doxygen-awesome-interactive-toc.js
+HTML_COLORSTYLE=AUTO_DARK
 
 HTML_COLORSTYLE_HUE=209
 HTML_COLORSTYLE_SAT=255
@@ -251,7 +252,7 @@ HTML_DYNAMIC_MENUS=YES
 HTML_DYNAMIC_SECTIONS=YES
 HTML_INDEX_NUM_ENTRIES=100
 
-DISABLE_INDEX=YES
+DISABLE_INDEX=NO
 
 GENERATE_TREEVIEW=YES
 TREEVIEW_WIDTH=335
@@ -305,7 +306,7 @@ EXTERNAL_SEARCH_ID="com.xyphenore.@PROJECT_NAME@"
 
 GENERATE_HTMLHELP=NO
 
-CHM_FILE="chm/docs_@PROJECT_NAME@"
+CHM_FILE="chm/doc_@PROJECT_NAME@"
 
 HHC_LOCATION=""
 
@@ -323,7 +324,7 @@ TOC_EXPAND=NO
 
 GENERATE_QHP=NO
 
-QCH_FILE="qch/docs_@PROJECT_NAME@"
+QCH_FILE="qch/doc_@PROJECT_NAME@"
 
 QHP_NAMESPACE="com.xyphenore.@PROJECT_NAME@"
 
@@ -373,9 +374,9 @@ PAPER_TYPE="a4"
 
 #EXTRA_PACKAGES
 
-LATEX_HEADER="@CMAKE_SOURCE_DIR@/docs/settings/header.tex"
-LATEX_FOOTER="@CMAKE_SOURCE_DIR@/docs/settings/footer.tex"
-LATEX_EXTRA_STYLESHEET="@CMAKE_SOURCE_DIR@/docs/settings/doxygen.sty"
+LATEX_HEADER="@CMAKE_SOURCE_DIR@/doc/settings/header.tex"
+LATEX_FOOTER="@CMAKE_SOURCE_DIR@/doc/settings/footer.tex"
+LATEX_EXTRA_STYLESHEET="@CMAKE_SOURCE_DIR@/doc/settings/doxygen.sty"
 LATEX_EXTRA_FILES=""
 
 PDF_HYPERLINKS=YES
@@ -390,7 +391,7 @@ LATEX_BIB_STYLE="plain"
 
 LATEX_TIMESTAMP=NO
 
-LATEX_EMOJI_DIRECTORY="@CMAKE_SOURCE_DIR@/docs/emoji"
+LATEX_EMOJI_DIRECTORY="@CMAKE_SOURCE_DIR@/doc/emoji"
 
 ######################################
 #     RTF Output Settings            #

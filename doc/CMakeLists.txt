@@ -28,6 +28,7 @@ find_package( Doxygen REQUIRED )
 # Create the library doxygen-awesome-css
 # ----------------------------------------------------------------------------------------------------------------------
 
+set( STRIPED_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/include" )
 set( INPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/include/${PROJECT_NAME}" )
 set( CONFIG_TEMPLATE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenConfig.conf.in" )
 set( CONFIG_FILE "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenConfig.conf" )
